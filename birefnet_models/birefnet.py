@@ -5,15 +5,35 @@ from einops import rearrange
 from kornia.filters import laplacian
 from huggingface_hub import PyTorchModelHubMixin
 
-from config import Config
-from dataset import class_labels_TR_sorted
-from models.backbones.build_backbone import build_backbone
-from models.modules.decoder_blocks import BasicDecBlk, ResBlk
-from models.modules.lateral_blocks import BasicLatBlk
-from models.modules.aspp import ASPP, ASPPDeformable
-from models.refinement.refiner import Refiner, RefinerPVTInChannels4, RefUNet
-from models.refinement.stem_layer import StemLayer
+from birefnet_config.config import Config
+# from birefnet_dataset.dataset import class_labels_TR_sorted
+from birefnet_models.backbones.build_backbone import build_backbone
+from birefnet_models.modules.decoder_blocks import BasicDecBlk, ResBlk
+from birefnet_models.modules.lateral_blocks import BasicLatBlk
+from birefnet_models.modules.aspp import ASPP, ASPPDeformable
+from birefnet_models.refinement.refiner import Refiner, RefinerPVTInChannels4, RefUNet
+from birefnet_models.refinement.stem_layer import StemLayer
 
+
+### dataset.py
+
+_class_labels_TR_sorted = (
+    "Airplane, Ant, Antenna, Archery, Axe, BabyCarriage, Bag, BalanceBeam, Balcony, Balloon, Basket, BasketballHoop, Beatle, Bed, Bee, Bench, Bicycle, "
+    "BicycleFrame, BicycleStand, Boat, Bonsai, BoomLift, Bridge, BunkBed, Butterfly, Button, Cable, CableLift, Cage, Camcorder, Cannon, Canoe, Car, "
+    "CarParkDropArm, Carriage, Cart, Caterpillar, CeilingLamp, Centipede, Chair, Clip, Clock, Clothes, CoatHanger, Comb, ConcretePumpTruck, Crack, Crane, "
+    "Cup, DentalChair, Desk, DeskChair, Diagram, DishRack, DoorHandle, Dragonfish, Dragonfly, Drum, Earphone, Easel, ElectricIron, Excavator, Eyeglasses, "
+    "Fan, Fence, Fencing, FerrisWheel, FireExtinguisher, Fishing, Flag, FloorLamp, Forklift, GasStation, Gate, Gear, Goal, Golf, GymEquipment, Hammock, "
+    "Handcart, Handcraft, Handrail, HangGlider, Harp, Harvester, Headset, Helicopter, Helmet, Hook, HorizontalBar, Hydrovalve, IroningTable, Jewelry, Key, "
+    "KidsPlayground, Kitchenware, Kite, Knife, Ladder, LaundryRack, Lightning, Lobster, Locust, Machine, MachineGun, MagazineRack, Mantis, Medal, MemorialArchway, "
+    "Microphone, Missile, MobileHolder, Monitor, Mosquito, Motorcycle, MovingTrolley, Mower, MusicPlayer, MusicStand, ObservationTower, Octopus, OilWell, "
+    "OlympicLogo, OperatingTable, OutdoorFitnessEquipment, Parachute, Pavilion, Piano, Pipe, PlowHarrow, PoleVault, Punchbag, Rack, Racket, Rifle, Ring, Robot, "
+    "RockClimbing, Rope, Sailboat, Satellite, Scaffold, Scale, Scissor, Scooter, Sculpture, Seadragon, Seahorse, Seal, SewingMachine, Ship, Shoe, ShoppingCart, "
+    "ShoppingTrolley, Shower, Shrimp, Signboard, Skateboarding, Skeleton, Skiing, Spade, SpeedBoat, Spider, Spoon, Stair, Stand, Stationary, SteeringWheel, "
+    "Stethoscope, Stool, Stove, StreetLamp, SweetStand, Swing, Sword, TV, Table, TableChair, TableLamp, TableTennis, Tank, Tapeline, Teapot, Telescope, Tent, "
+    "TobaccoPipe, Toy, Tractor, TrafficLight, TrafficSign, Trampoline, TransmissionTower, Tree, Tricycle, TrimmerCover, Tripod, Trombone, Truck, Trumpet, Tuba, "
+    "UAV, Umbrella, UnevenBars, UtilityPole, VacuumCleaner, Violin, Wakesurfing, Watch, WaterTower, WateringPot, Well, WellLid, Wheel, Wheelchair, WindTurbine, Windmill, WineGlass, WireWhisk, Yacht"
+)
+class_labels_TR_sorted = _class_labels_TR_sorted.split(", ")
 
 def image2patches(image, grid_h=2, grid_w=2, patch_ref=None, transformation='b c (hg h) (wg w) -> (b hg wg) c h w'):
     if patch_ref is not None:

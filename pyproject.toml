@@ -1,0 +1,41 @@
+
+[tool.poetry]
+name = "birefnet"
+version = "0.1.1"
+description = "birefnet: Bilateral Reference for High-Resolution Dichotomous Image Segmentation"
+authors = ["Peng Zheng", "Dehong Gao", "Deng-Ping Fan", "Li Liu", "Jorma Laaksonen", "Wanli Ouyang", "Nicu Sebe"]
+license = "Apache-2.0"
+readme = "README.md"
+packages = [
+    { include = "birefnet_config" },
+    { include = "birefnet_models" },
+]
+
+[tool.poetry.dependencies]
+python = ">=3.9"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 119
+target-version = "py39"
+extend-exclude = ["__pycache__", "*.pyc", "*.egg-info", ".cache"]
+select = ["E", "F", "W", "C90", "I", "UP", "B", "C4", "RET", "RUF", "SIM"]
+ignore = [
+    "UP006",  # Use list instead of typing.List
+    "UP007",  # Use X | Y instead of Union
+    "UP009",
+    "UP035",
+    "UP038",
+    "E402",   # Module level import not at top
+    "RET504"  # Unnecessary variable assignment before return
+]
+
+[tool.isort]
+profile = "black"
+
+[tool.black]
+line-length = 119
+skip-string-normalization = true
