@@ -9,6 +9,7 @@ readme = "README.md"
 packages = [
     { include = "birefnet_config" },
     { include = "birefnet_models" },
+    { include = "utils" },
 ]
 
 [tool.poetry.dependencies]
