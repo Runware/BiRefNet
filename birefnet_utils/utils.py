@@ -25,6 +25,28 @@ def path_to_image(path, size=(1024, 1024), color_type=['rgb', 'gray'][0]):
     return image
 
 
+def extract_object(birefnet, image):
+    # Data settings
+    image_size = (1024, 1024)
+    transform_image = transforms.Compose(
+        [
+            transforms.Resize(image_size),
+            transforms.ToTensor(),
+            transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
+        ]
+    )
+
+    input_images = transform_image(image).unsqueeze(0).to("cuda")
+
+    # Prediction
+    with torch.no_grad():
+        preds = birefnet(input_images)[-1].sigmoid().cpu()
+    pred = preds[0].squeeze()
+    pred_pil = transforms.ToPILImage()(pred)
+    mask = pred_pil.resize(image.size)
+    image.putalpha(mask)
+    return image, mask
+
 
 def check_state_dict(state_dict, unwanted_prefixes=['module.', '_orig_mod.']):
     for k, v in list(state_dict.items()):
