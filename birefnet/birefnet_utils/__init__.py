@@ -5,7 +5,7 @@ This module contains utility functions for image processing, logging, checkpoint
 and other common operations used throughout the BiRefNet project.
 """
 
-from .utils import (
+from birefnet.birefnet_utils.utils import (
     path_to_image,
     check_state_dict,
     generate_smoothed_gt,

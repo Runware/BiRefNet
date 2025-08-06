@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
-from birefnet_models.modules.aspp import ASPP, ASPPDeformable
-from birefnet_config.config import Config
+from birefnet.birefnet_models.modules.aspp import ASPP, ASPPDeformable
+from birefnet.birefnet_config.config import Config
 
 
 config = Config()

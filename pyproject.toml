@@ -7,9 +7,7 @@ authors = ["Peng Zheng", "Dehong Gao", "Deng-Ping Fan", "Li Liu", "Jorma Laakson
 license = "Apache-2.0"
 readme = "README.md"
 packages = [
-    { include = "birefnet_config" },
-    { include = "birefnet_models" },
-    { include = "birefnet_utils" },
+    { include = "birefnet" },
 ]
 
 [tool.poetry.dependencies]

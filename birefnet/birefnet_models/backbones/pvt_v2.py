@@ -5,7 +5,7 @@ import torch.nn as nn
 
 from timm.layers import DropPath, to_2tuple, trunc_normal_
 
-from birefnet_config.config import Config
+from birefnet.birefnet_config.config import Config
 
 config = Config()
 

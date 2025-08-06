@@ -5,14 +5,14 @@ from einops import rearrange
 from kornia.filters import laplacian
 from huggingface_hub import PyTorchModelHubMixin
 
-from birefnet_config.config import Config
+from birefnet.birefnet_config.config import Config
 # from birefnet_dataset.dataset import class_labels_TR_sorted
-from birefnet_models.backbones.build_backbone import build_backbone
-from birefnet_models.modules.decoder_blocks import BasicDecBlk, ResBlk
-from birefnet_models.modules.lateral_blocks import BasicLatBlk
-from birefnet_models.modules.aspp import ASPP, ASPPDeformable
-from birefnet_models.refinement.refiner import Refiner, RefinerPVTInChannels4, RefUNet
-from birefnet_models.refinement.stem_layer import StemLayer
+from birefnet.birefnet_models.backbones.build_backbone import build_backbone
+from birefnet.birefnet_models.modules.decoder_blocks import BasicDecBlk, ResBlk
+from birefnet.birefnet_models.modules.lateral_blocks import BasicLatBlk
+from birefnet.birefnet_models.modules.aspp import ASPP, ASPPDeformable
+from birefnet.birefnet_models.refinement.refiner import Refiner, RefinerPVTInChannels4, RefUNet
+from birefnet.birefnet_models.refinement.stem_layer import StemLayer
 
 
 ### dataset.py

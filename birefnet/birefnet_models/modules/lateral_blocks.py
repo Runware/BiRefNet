@@ -4,7 +4,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from functools import partial
 
-from birefnet_config.config import Config
+from birefnet.birefnet_config.config import Config
 
 
 config = Config()

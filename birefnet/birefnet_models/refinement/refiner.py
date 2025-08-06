@@ -7,12 +7,12 @@ import torch.nn.functional as F
 from torchvision.models import vgg16, vgg16_bn
 from torchvision.models import resnet50
 
-from birefnet_config.config import Config
+from birefnet.birefnet_config.config import Config
 # from birefnet_dataset.dataset import class_labels_TR_sorted
-from birefnet_models.backbones.build_backbone import build_backbone
-from birefnet_models.modules.decoder_blocks import BasicDecBlk
-from birefnet_models.modules.lateral_blocks import BasicLatBlk
-from birefnet_models.refinement.stem_layer import StemLayer
+from birefnet.birefnet_models.backbones.build_backbone import build_backbone
+from birefnet.birefnet_models.modules.decoder_blocks import BasicDecBlk
+from birefnet.birefnet_models.modules.lateral_blocks import BasicLatBlk
+from birefnet.birefnet_models.refinement.stem_layer import StemLayer
 
 
 class RefinerPVTInChannels4(nn.Module):

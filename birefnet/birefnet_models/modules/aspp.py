@@ -1,8 +1,8 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from birefnet_models.modules.deform_conv import DeformableConv2d
-from birefnet_config.config import Config
+from birefnet.birefnet_models.modules.deform_conv import DeformableConv2d
+from birefnet.birefnet_config.config import Config
 
 
 config = Config()
