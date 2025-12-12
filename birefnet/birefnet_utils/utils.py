@@ -25,7 +25,7 @@ def path_to_image(path, size=(1024, 1024), color_type=['rgb', 'gray'][0]):
     return image
 
 
-def extract_object(birefnet, image):
+def extract_object(birefnet, image, device: torch.device):
     # Data settings
     image_size = (1024, 1024)
     transform_image = transforms.Compose(
@@ -36,7 +36,7 @@ def extract_object(birefnet, image):
         ]
     )
 
-    input_images = transform_image(image).unsqueeze(0).to("cuda")
+    input_images = transform_image(image).unsqueeze(0).to(device)
 
     # Prediction
     with torch.no_grad():
@@ -75,10 +75,10 @@ class Logger():
         self.logger.addHandler(self.stdout_handler)
         self.logger.setLevel(logging.INFO)
         self.logger.propagate = False
-    
+
     def info(self, txt):
         self.logger.info(txt)
-    
+
     def close(self):
         self.file_handler.close()
         self.stdout_handler.close()
